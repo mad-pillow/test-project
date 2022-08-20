@@ -1,0 +1,88 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type DemandForPlaceModel {
+  id: ID!
+  monthlyData: [MonthlyDemandDataModel!]!
+  title: String!
+}
+
+type DemandModel {
+  demandGrowth: Int!
+  demandGrowthLastYearQuater: Int!
+  demandMedianPrice: Float!
+  demandMedianPsf: Int!
+  demandRankInCountry: Int!
+  demandRankInState: Int!
+  medianPriceGrowth: Float!
+  medianPsfGrowth: Float!
+  percentile25th: Int!
+  percentile75th: Int!
+  rankInCountry: Int!
+  rankInState: Int!
+  supplyDemand: Float!
+  supplyDemandGrowth: Float!
+  supplyDemandGrowthLastYearQuater: Float!
+  supplyGrowth: Float!
+  supplyGrowthLastYearQuater: Int!
+  supplyRankInCountry: Int!
+  supplyRankInState: Int!
+}
+
+type DemandPlaceForCurrentMonthCollectionModel {
+  demandCurrentMonthData: [DemandPlaceForCurrentMonthModel!]!
+}
+
+type DemandPlaceForCurrentMonthModel {
+  demandData: DemandModel!
+  id: String!
+  title: String!
+}
+
+type MonthlyDemandDataModel {
+  demandData: DemandModel!
+  timeStamp: String!
+}
+
+enum PropertType {
+  AllResidential
+  Condominimum
+  Duplex
+  Townhouse
+  TwinVillas
+}
+
+enum PropertyPrice {
+  AllPrices
+  L
+  M
+  S
+  XL
+}
+
+enum PropertySize {
+  AllSizes
+  L
+  M
+  S
+  XL
+}
+
+type Query {
+  demandCurrentMonth(limit: Float!, offset: Float!, place: String, propertyPrice: PropertyPrice!, propertySize: PropertySize!, propertyType: PropertType!, state: [States!]!, transactionType: TransactionType = Sales): DemandPlaceForCurrentMonthCollectionModel!
+  demandPlace(id: String!): DemandForPlaceModel!
+}
+
+enum States {
+  Johor
+  Kedah
+  Kelantan
+  KualaLumpur
+  Labuan
+}
+
+enum TransactionType {
+  Rent
+  Sales
+}
