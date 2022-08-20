@@ -70,7 +70,7 @@ enum PropertySize {
 }
 
 type Query {
-  demandCurrentMonth(limit: Float!, offset: Float!, place: String, propertyPrice: PropertyPrice!, propertySize: PropertySize!, propertyType: PropertType!, state: [States!]!, transactionType: TransactionType = Sales): DemandPlaceForCurrentMonthCollectionModel!
+  demandCurrentMonth(place: String, propertyPrice: PropertyPrice!, propertySize: PropertySize!, propertyType: PropertType!, state: [States!]!, transactionType: TransactionType = Sales): DemandPlaceForCurrentMonthCollectionModel!
   demandPlace(id: String!): DemandForPlaceModel!
 }
 
