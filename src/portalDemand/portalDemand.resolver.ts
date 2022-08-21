@@ -21,6 +21,8 @@ export class PortalDemandResolver {
   @Query(() => DemandPlaceForCurrentMonthCollectionModel)
   async demandCurrentMonth(
     @Args() args: DemandArgs,
+    @Args('limit') limit: number,
+    @Args('offset') offset: number,
   ): Promise<DemandPlaceForCurrentMonthCollectionModel> {
     this.logger.log(
       `Fetching demand data ===> started with arguments: ${JSON.stringify(
@@ -40,7 +42,15 @@ export class PortalDemandResolver {
           result.data,
         )}`,
       );
-      return result.data;
+
+      const paginatedResult = { ...result.data };
+      paginatedResult.demandCurrentMonthData =
+        paginatedResult.demandCurrentMonthData.slice(
+          offset * limit,
+          offset * limit + limit,
+        );
+
+      return paginatedResult;
     } catch (error) {
       this.logger.log('Fatching demand data ===> failed');
       this.logger.error(error);
